@@ -1,0 +1,42 @@
+body {
+    padding:0;
+    margin:0;
+}
+
+#header {
+    background: whitesmoke;
+}
+
+#header * {
+    padding: 10px;
+}
+
+#container {
+    padding: 10px;
+}
+
+.testCompatibilite * {
+    margin: 0px 20px 20px 0px;
+}
+
+.testCompatibilite .rounded {
+    display: inline-block;
+    width: 100px;
+    height: 100px;
+    background: dimgray;
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+    -ms-border-radius: 10px;
+    border-radius: 10px;
+}
+
+.testCompatibilite .shadowed {
+    display: inline-block;
+    width: 100px;
+    height: 100px;
+    background: dimgray;
+    -webkit-box-shadow: 2px 2px 15px 5px rgba(0,0,0, 0.4);
+    -moz-box-shadow: 2px 2px 15px 5px rgba(0,0,0, 0.4);
+    -ms-box-shadow: 2px 2px 15px 5px rgba(0,0,0, 0.4);
+    box-shadow: 2px 2px 15px 5px rgba(0,0,0, 0.4);
+}
