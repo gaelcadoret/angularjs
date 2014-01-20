@@ -15,31 +15,28 @@
 
             <header id="header">
                 <h1>TodoList</h1>
-                <form action="#" id="todo-form">
-                    <input type="text" id="new-todo" placeholder="Nouvelle tâche" autofocus autocomplete="off">
+                <form action="#" id="todo-form" ng-submit="addTodo()">
+                    <input type="text" id="new-todo" placeholder="Nouvelle tâche" autofocus autocomplete="off" ng-model="newtodo">
                 </form>
             </header>
 
             <section id="main">
+
                 <ul id="todo-list">
-                    <li>
+
+                    <li ng-repeat="todo in todos" ng-class="{completed : todo.completed}">
                         <div class="view">
-                            <input type="checkbox" class="toggle">
-                            <label>Etendre le linge</label>
-                            <button class="destroy"></button>
-                        </div>
-                    </li>
-                    <li class="completed">
-                        <div class="view">
-                            <input type="checkbox" class="toggle">
-                            <label>Etendre le linge</label>
-                            <button class="destroy"></button>
+                            <input type="checkbox" class="toggle" ng-model="todo.completed">
+                            <label>{{todo.name}}</label>
+                            <button class="destroy" ng-click="removeTodo($index)"></button>
                         </div>
                         <form action="#">
                             <input class="edit" value="Etendre le linge">
                         </form>
                     </li>
+
                 </ul>
+
             </section>
 
             <footer id="footer">
