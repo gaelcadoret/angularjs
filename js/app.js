@@ -9,10 +9,11 @@ app.directive('ngBlur', function() {
     };
 });
 
-app.controller('TodoCtrl',function ($scope, filterFilter, $http) {
-
+app.controller('TodoCtrl',function ($scope, filterFilter, $http, $location) {
+    console.log($location);
     $scope.todos = [];
     $scope.placeholder = "Chargement...";
+    $scope.statusFilter = '';
 
     $http.get('data/json/todos.json').success(function(data) {
         console.log('ajax request in success.');
@@ -27,6 +28,16 @@ app.controller('TodoCtrl',function ($scope, filterFilter, $http) {
         $scope.remaining = filterFilter($scope.todos, {completed:false}).length;
         $scope.allchecked = !$scope.remaining;
     }, true);
+
+    if($location.path == ''){ $location.path('/') }
+    $scope.location = $location;
+
+    $scope.$watch('location.path()', function(path) {
+        $scope.statusFilter =
+            (path == '/active') ? {completed: false} :
+            (path == '/done') ? {completed: true} :
+            null;
+    });
 
     $scope.removeTodo = function(index) {
         console.log('removeTodo called.');
