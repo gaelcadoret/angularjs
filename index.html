@@ -9,29 +9,31 @@
         <link rel="stylesheet" href="css/todomvc.css" />
     </head>
 
-    <body ng-app>
+    <body ng-app="todo">
 
         <section id="todoapp" ng-controller="TodoCtrl">
 
             <header id="header">
                 <h1>TodoList</h1>
                 <form action="#" id="todo-form" ng-submit="addTodo()">
-                    <input type="text" id="new-todo" placeholder="Nouvelle tâche" autofocus autocomplete="off" ng-model="newtodo">
+                    <input type="text" id="new-todo" placeholder="{{placeholder}}" autofocus autocomplete="off" ng-model="newtodo">
                 </form>
             </header>
 
             <section id="main">
 
+                <input type="checkbox" id="toggle-all" ng-model="allchecked" ng-click="checkAllTodo(allchecked)" />
+
                 <ul id="todo-list">
 
-                    <li ng-repeat="todo in todos" ng-class="{completed : todo.completed}">
+                    <li ng-repeat="todo in todos | orderBy:'completed'" ng-class="{completed : todo.completed, editing : todo.editing}" ng-dblclick="todo.editing = true">
                         <div class="view">
                             <input type="checkbox" class="toggle" ng-model="todo.completed">
                             <label>{{todo.name}}</label>
                             <button class="destroy" ng-click="removeTodo($index)"></button>
                         </div>
                         <form action="#">
-                            <input class="edit" value="Etendre le linge">
+                            <input class="edit" ng-model="todo.name" ng-blur="editTodo(todo)">
                         </form>
                     </li>
 
@@ -41,6 +43,11 @@
 
             <footer id="footer">
                 <span id="todo-count"><strong>{{remaining}}</strong> tâches restantes</span>
+                <ul id="filters">
+                    <li><a href="#" class="selected">Toutes</a></li>
+                    <li><a href="#">Actives</a></li>
+                    <li><a href="#">Terminées</a></li>
+                </ul>
             </footer>
 
         </section>
